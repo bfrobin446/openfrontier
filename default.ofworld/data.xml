@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ofworld>
+    <date>0.0</date>
+    <code>
+        <![CDATA[
+        def formatDate(d):
+            # 0375.0 is 2517-01-01 UTC, epoch 2640000.5
+            return "RJDN {0:06.1f}".format(d + 375)
+        ]]>
+    </code>
+    <solarsystem id="sol">
+        <coords x="0.0" y="0.0" />
+        <displayname>Sol</displayname>
+    </solarsystem>
+    <player>
+        <fleet />
+    </player>
+</ofworld>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GameWindow</class>
+ <widget class="QMainWindow" name="GameWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>OpenFrontier</string>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuGame">
+    <property name="title">
+     <string>Game</string>
+    </property>
+    <addaction name="actionNew"/>
+    <addaction name="actionLoad"/>
+    <addaction name="separator"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionSave_as"/>
+    <addaction name="separator"/>
+    <addaction name="actionSettings" />
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuInfo">
+    <property name="title">
+     <string>Info</string>
+    </property>
+    <addaction name="actionPilot"/>
+    <addaction name="actionCrew"/>
+    <addaction name="actionEquipment"/>
+    <addaction name="actionMissions"/>
+    <addaction name="separator"/>
+    <addaction name="actionLocations"/>
+    <addaction name="actionTechnology"/>
+   </widget>
+   <addaction name="menuGame"/>
+   <addaction name="menuInfo"/>
+  </widget>
+  <action name="actionNew">
+   <property name="text">
+    <string>New…</string>
+   </property>
+  </action>
+  <action name="actionLoad">
+   <property name="text">
+    <string>Load…</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionSave_as">
+   <property name="text">
+    <string>Save as…</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="text">
+    <string>Settings…</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </action>
+  <action name="actionCrew">
+   <property name="text">
+    <string>Crew…</string>
+   </property>
+  </action>
+  <action name="actionEquipment">
+   <property name="text">
+    <string>Equipment…</string>
+   </property>
+  </action>
+  <action name="actionMissions">
+   <property name="text">
+    <string>Missions…</string>
+   </property>
+  </action>
+  <action name="actionPilot">
+   <property name="text">
+    <string>Pilot…</string>
+   </property>
+  </action>
+  <action name="actionLocations">
+   <property name="text">
+    <string>Locations…</string>
+   </property>
+  </action>
+  <action name="actionTechnology">
+   <property name="text">
+    <string>Technology…</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
