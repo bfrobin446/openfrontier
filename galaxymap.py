@@ -14,6 +14,8 @@ class GalaxyMapScene(QGraphicsScene):
         self.timer.setInterval(50)
         self.timer.timeout.connect(self.tick)
         self.waiting = False
+        self.setBackgroundBrush(colors.galaxy["background"].current)
+        colors.changeNotifier.triggered.connect(self.updateColors)
 
     def addFleet(self, fleet):
         if fleet is openfrontier.player.fleet:
@@ -51,6 +53,14 @@ class GalaxyMapScene(QGraphicsScene):
         if not (self.playerFleetItem.wantAnimation() or self.waiting):
             self.stopAnimation()
 
+    def updateColors(self):
+        self.setBackgroundBrush(colors.galaxy["background"].current)
+        for item in self.items():
+            try:
+                item.updateColor()
+            except AttributeError:
+                pass
+
 class MapItem(QAbstractGraphicsShapeItem):
     def __init__(self, center, radius = 12):
         QAbstractGraphicsShapeItem.__init__(self)
@@ -60,10 +70,14 @@ class MapItem(QAbstractGraphicsShapeItem):
         self.hoverTextItem.setBrush(QBrush(Qt.white))
         self.hoverTextItem.hide()
         self.setRadius(radius)
+        self.updateColor() # defined in subclasses.
 
     def setRadius(self, radius):
         self.radius = radius
         self.hoverTextItem.setPos(radius + 5, -10)
+
+    def setColor(self, color):
+        self.setPen(QPen(QBrush(color), 3))
 
     def setHoverText(self, text):
         self.hoverTextItem.setText(text)
@@ -86,17 +100,18 @@ class SolarSystemMapItem(MapItem):
     def __init__(self, ss):
         MapItem.__init__(self, ss.coords)
         self.system = ss
-        self.setPen(QPen(QBrush(colors.galaxy["solarsystem"].current), 3))
         self.setHoverText(ss.displayName)
 
     def location(self):
         return Location(Location.ON_SYSTEM_MAP, self.system)
 
+    def updateColor(self):
+        self.setColor(colors.galaxy['solarsystem'].current)
+
 class FleetMapItem(MapItem):
     def __init__(self, fleet):
         MapItem.__init__(self, fleet.location.coords, 8)
         self.fleet = fleet
-        self.setPen(QPen(QBrush(colors.galaxy["fleet"].current), 3))
 
     def location(self):
         return self.fleet.location
@@ -112,18 +127,21 @@ class FleetMapItem(MapItem):
             else:
                 self.scene().removeItem(self)
 
+    def updateColor(self):
+        self.setColor(colors.galaxy["fleet"].current)
+
 class PlayerFleetMapItem(FleetMapItem):
     def __init__(self, fleet):
         FleetMapItem.__init__(self, fleet)
-        self.setPen(QPen(QBrush(colors.galaxy["player"].current), 3))
     def wantAnimation(self):
         return self.fleet.navigator.destination is not None
+    def updateColor(self):
+        self.setColor(colors.galaxy["player"].current)
 
 def populate():
     global mainScene
     if mainScene is None:
         mainScene = GalaxyMapScene(-512, -512, 1024, 1024)
-        mainScene.setBackgroundBrush(colors.galaxy["background"].current)
     else:
         mainScene.clear()
 

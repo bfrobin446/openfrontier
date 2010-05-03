@@ -3,6 +3,10 @@ from PyQt4.QtGui  import *
 
 from collections import OrderedDict
 
+from notifier import Notifier
+
+changeNotifier = Notifier()
+
 class Color(object):
     settings = QSettings()
     settings.beginGroup('colors')
@@ -14,6 +18,7 @@ class Color(object):
     def update(self, newColor):
         self.settings.setValue(self.name, newColor)
         self.current = newColor
+        changeNotifier.trigger()
 
 def defineColor(cat, name, default, dname):
     globals()[cat][name] = Color('/'.join((cat, name)), default, dname)
