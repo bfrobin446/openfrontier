@@ -15,11 +15,12 @@ from location    import Location
 from player      import Player
 from solarsystem import SolarSystem
 
-worlddir = sys.argv[1]
+srcPath = sys.argv[1]
+destdir = sys.argv[2]
 
-xmlFile = open(os.path.join(worlddir, 'data.xml'))
-pickleFile = open(os.path.join(worlddir, 'data.pickle'), 'wb')
-codeFile = open(os.path.join(worlddir, 'ofworld.py'), 'w')
+xmlFile = open(srcPath)
+pickleFile = open(os.path.join(destdir, 'data.pickle'), 'wb')
+codeFile = open(os.path.join(destdir, 'ofworld.py'), 'w')
 
 xmlDocument = minidom.parse(xmlFile)
 xmlFile.close()
