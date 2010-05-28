@@ -29,6 +29,7 @@ for cat in categories:
     globals()[cat] = OrderedDict()
 
 defineColor('galaxy', 'background',  QColor(Qt.black), "Background")
+defineColor('galaxy', 'text',        QColor(Qt.white), "Text")
 defineColor('galaxy', 'solarsystem', QColor(Qt.white), "Solar system")
 defineColor('galaxy', 'fleet',       QColor(Qt.blue),  "Ship or group of ships")
 defineColor('galaxy', 'player',      QColor(Qt.cyan),  "Player fleet")
