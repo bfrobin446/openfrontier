@@ -37,7 +37,8 @@ pickler.dump(techs)
 # Ship classes
 shipClasses = {}
 for element in xmlDocument.getElementsByTagName("shipclass"):
-    pass
+    sc = ShipClass.fromDOMElement(element)
+    shipClasses[sc.id] = sc
 pickler.dump(shipClasses)
 
 fleetTemplates = {}
