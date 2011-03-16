@@ -9,6 +9,7 @@ class ColorButton(QAbstractButton):
 
     def color(self):
         return self.currentColor
+
     def setColor(self, newColor):
         self.currentColor = newColor
         self.colorChanged.emit(newColor)
@@ -24,7 +25,8 @@ class ColorButton(QAbstractButton):
             QAbstractButton.__init__(self, *args, **kwargs)
             self.currentColor = QColor(Qt.black)
 
-        self.setSizePolicy(QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum, QSizePolicy.ToolButton))
+        self.setSizePolicy(QSizePolicy(
+            QSizePolicy.Minimum, QSizePolicy.Minimum, QSizePolicy.ToolButton))
 
         self.margins = self.sizeHint() - QSize(22, 22)
         self.clicked.connect(self.onClick)
@@ -36,14 +38,23 @@ class ColorButton(QAbstractButton):
     def initStyleOption(self, option):
         option.initFrom(self)
         option.toolButtonStyle = Qt.ToolButtonIconOnly
-        option.features = option.ToolButtonFeatures(0) #QStyleOptionToolButton.None
+        option.features = option.ToolButtonFeatures(0)
+                                    #QStyleOptionToolButton.None
         option.subControls = QStyle.SC_ToolButton
-        option.activeSubControls = QStyle.SC_ToolButton if self.isDown() else QStyle.SC_None
+        option.activeSubControls = (
+                QStyle.SC_ToolButton if self.isDown() else QStyle.SC_None)
         option.state = reduce(operator.or_, (
-            QStyle.State_Active   if self.isActiveWindow() else QStyle.State_None,
-            QStyle.State_Enabled  if self.isEnabled()      else QStyle.State_None,
-            QStyle.State_HasFocus if self.hasFocus()       else QStyle.State_None,
-            QStyle.State_Sunken   if self.isDown()         else QStyle.State_Raised,
+            QStyle.State_Active
+                if self.isActiveWindow() else QStyle.State_None,
+
+            QStyle.State_Enabled
+                if self.isEnabled()      else QStyle.State_None,
+
+            QStyle.State_HasFocus
+                if self.hasFocus()       else QStyle.State_None,
+
+            QStyle.State_Sunken
+                if self.isDown()         else QStyle.State_Raised,
             ))
 
     def sizeHint(self):
