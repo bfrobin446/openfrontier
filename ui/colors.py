@@ -10,15 +10,18 @@ changeNotifier = Notifier()
 class Color(object):
     settings = QSettings()
     settings.beginGroup('colors')
+
     def __init__(self, name, default, dname):
         self.default = default
         self.name = name
         self.displayname = dname
         self.current = self.settings.value(self.name, self.default)
+
     def update(self, newColor):
         self.settings.setValue(self.name, newColor)
         self.current = newColor
         changeNotifier.trigger()
+
 
 def defineColor(cat, name, default, dname):
     globals()[cat][name] = Color('/'.join((cat, name)), default, dname)
