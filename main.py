@@ -10,9 +10,6 @@ app.setApplicationName("OpenFrontier")
 
 import ui
 
-ui.showMainWindow()
+initialWindow = ui.LoaderWindow()
+initialWindow.show()
 app.exec_()
-
-# Let most of the GUI objects be garbage collected before the
-# QApplication. Seems to save on segfaults.
-del ui.mainWindow

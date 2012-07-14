@@ -1,14 +1,13 @@
 from PyQt4.QtCore import *
 from PyQt4.QtGui  import *
-from PyQt4 import uic
 
 import openfrontier
 
-class SplashWidget(QWidget):
+class LoaderWindow(QWidget):
     def __init__(self, parent=None, flags=Qt.Widget):
         QWidget.__init__(self, parent, flags)
         self.bgimage = QPixmap(openfrontier.distFile('ui/splash.png'))
-        
+
         self.buttonBox = QWidget(self)
         self.buttonBox.setLayout(QHBoxLayout())
 
@@ -25,11 +24,17 @@ class SplashWidget(QWidget):
         self.btnSettings = createButton("Settings")
         self.btnQuit     = createButton("Quit")
 
+    def sizeHint(self):
+        return self.bgimage.size()
+
     def resizeEvent(self, evt):
         boxHeight = 60
         self.buttonBox.setGeometry(
-                0 if self.width() <= self.bgimage.width() else (self.width() - self.bgimage.width()) / 2,
-                min(self.bgimage.height() - boxHeight + (self.height() - self.bgimage.height()) / 2,
+                0 if self.width() <= self.bgimage.width()
+                    else (self.width() - self.bgimage.width()) / 2,
+                min(self.bgimage.height()
+                        - boxHeight
+                        + (self.height() - self.bgimage.height()) / 2,
                     self.height() - boxHeight),
                 min(self.width(), self.bgimage.width()),
                 boxHeight
