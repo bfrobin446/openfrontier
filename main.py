@@ -8,8 +8,8 @@ import sys
 app = QApplication(sys.argv)
 app.setApplicationName("OpenFrontier")
 
-import ui
+import ui.loader
 
-initialWindow = ui.LoaderWindow()
+initialWindow = ui.loader.LoaderWindow()
 initialWindow.show()
 app.exec_()
