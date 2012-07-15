@@ -14,6 +14,8 @@ import os.path
 from PyQt4.QtCore import *
 from PyQt4.QtGui  import *
 
+PICKLE_VERSION = 1
+
 distPath = os.path.abspath(sys.path[0])
 
 def distFile(relpath):

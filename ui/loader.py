@@ -2,6 +2,8 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui  import *
 
 import openfrontier
+import ofworld
+import ui.galaxymap as galaxymap
 
 from .prefs  import PrefsDialog
 
@@ -31,11 +33,27 @@ class LoaderWindow(QWidget):
 
     @pyqtSlot()
     def newGame(self):
-        pass
+        worldDir = openfrontier.distFile('')
+        worldToLoad = QFileDialog.getOpenFileName(
+                self,
+                "Choose world for new game",
+                worldDir,
+                "OpenFrontier worlds (*.ofworld)")
+        if worldToLoad:
+            world = ofworld.fromFile(worldToLoad)
+            self.mapWindow = galaxymap.MapWindow(world)
+            self.mapWindow.aboutToClose.connect(self.gameWindowClosing)
+            self.mapWindow.show()
+            self.hide()
 
     @pyqtSlot()
     def loadGame(self):
         pass
+
+    @pyqtSlot()
+    def gameWindowClosing(self):
+        self.show()
+        self.mapWindow = None
 
     @pyqtSlot()
     def showSettings(self):
