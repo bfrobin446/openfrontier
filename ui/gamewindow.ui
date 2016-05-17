@@ -49,8 +49,15 @@
     <addaction name="actionLocations"/>
     <addaction name="actionTechnology"/>
    </widget>
+   <widget class="QMenu" name="menuDebug">
+    <property name="title">
+     <string>Debug</string>
+    </property>
+    <addaction name="newFleet"/>
+   </widget> 
    <addaction name="menuGame"/>
    <addaction name="menuInfo"/>
+   <addaction name="menuDebug"/>
   </widget>
   <action name="actionNew">
    <property name="text">
@@ -112,7 +119,13 @@
     <string>Technology…</string>
    </property>
   </action>
+  <action name="newFleet">
+   <property name="text">
+    <string>Create fleet…</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
 </ui>
+<!-- vim: set softtabstop=1 shiftwidth=1 : -->

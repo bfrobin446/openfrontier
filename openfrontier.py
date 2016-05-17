@@ -3,16 +3,17 @@ OpenFrontier global state
 
 Important data members
 ----------------------
-distPath
-  Absolute path to the OpenFrontier distribution
+activeWorld
+  World object in use, or None if no game is loaded.
 defaultSavePath
   Default location for saved games
+distPath
+  Absolute path to the OpenFrontier distribution
+PICKLE_VERSION
+  Magic number to detect save/load incompatibility
 '''
 import sys
 import os.path
-
-from PyQt4.QtCore import *
-from PyQt4.QtGui  import *
 
 PICKLE_VERSION = 1
 
@@ -25,4 +26,4 @@ def distFile(relpath):
 # TODO something appropriate and platform specific
 defaultSavePath = distFile("SavedGames")
 
-__all__ = ["distPath", "distFile", "defaultSavePath"]
+activeWorld = None

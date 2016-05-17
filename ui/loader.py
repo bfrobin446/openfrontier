@@ -41,6 +41,7 @@ class LoaderWindow(QWidget):
                 "OpenFrontier worlds (*.ofworld)")
         if worldToLoad:
             world = ofworld.fromFile(worldToLoad)
+            openfrontier.activeWorld = world
             self.mapWindow = galaxymap.MapWindow(world)
             self.mapWindow.aboutToClose.connect(self.gameWindowClosing)
             self.mapWindow.show()
@@ -54,6 +55,7 @@ class LoaderWindow(QWidget):
     def gameWindowClosing(self):
         self.show()
         self.mapWindow = None
+        openfrontier.activeWorld = None
 
     @pyqtSlot()
     def showSettings(self):

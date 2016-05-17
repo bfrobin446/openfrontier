@@ -2,7 +2,9 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui  import *
 
 import openfrontier
+
 from location import Location
+from ship     import *
 
 __all__ = ["Fleet", "NavigatorBase", "PlayerFleetNavigator"]
 
@@ -29,10 +31,14 @@ class Fleet(object):
     @classmethod
     def fromDOMElement(cls, element, defaultNavigatorClass=lambda:None):
         import domhelpers
-        f = cls()
-        navElement = domhelpers.getFirstChildElementWithTagName(element, "navigator")
-        f.navigator = NavigatorBase.fromDOMElement(navElement) if navElement else defaultNavigatorClass()
-        return f
+        navElement = domhelpers.getFirstChildElementWithTagName(
+                element, "navigator")
+        navigator = ( NavigatorBase.fromDOMElement(navElement)
+                if navElement else defaultNavigatorClass() )
+        ships = [Ship.fromDOMElement(e)
+                for e in domhelpers.getChildElementsWithTagName(
+                   element, "ship")]
+        return cls(ships=ships, navigator=navigator)
 
 class NavigatorBase(object):
     @classmethod

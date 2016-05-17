@@ -1,18 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ofworld>
-    <date>0.0</date>
-    <code>
-        <![CDATA[
-        def formatDate(d):
-            # 0375.0 is 2517-01-01 UTC, epoch 2640000.5
-            return "RJDN {0:06.1f}".format(d + 375)
-        ]]>
-    </code>
+    <time>0</time>
     <solarsystem id="sol">
         <coords x="0.0" y="0.0" />
         <displayname>Sol</displayname>
+        <!-- * Inhabited planets: Earth, Venus, Mars, likely Luna.
+             * Roosevelt orbital shipyard orbiting Earth, but separate
+             *  destination.
+             * -->
     </solarsystem>
-    <player>
-        <fleet />
-    </player>
+    <solarsystem id="epsilon">
+        <coords x="10" y="70" />
+        <displayname>ϵ Eridani</displayname>
+        <!-- * Destinations: Goddard (terraformed planet); Copernicus orbital
+             * -->
+    </solarsystem>
+    <shipclass id="mantis">
+        <sprite name="mantis" />
+        <manufacturer>Avtek</manufacturer>
+        <model>Mantis</model>
+        <empty_mass>4000</empty_mass>
+        <!-- F-5E 4,349kg (Wikipedia) -->
+        <speed>500</speed>
+        <accel>1000</accel>
+        <turn>80</turn>
+        <warp cruise="0.75" dash="0.92" />
+    </shipclass>
+    <event type="once">
+        <runAt>0</runAt>
+        <action>debugEvent</action>
+    </event>
+    <code>
+        <![CDATA[
+        def debugEvent():
+            print("Debug event fired.")
+        ]]>
+    </code>
 </ofworld>
